@@ -1,0 +1,29 @@
+PREFIXES:
+		PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+
+
+PLAN PERFORM isro:RequestMove($path){
+	ID: "http://www.arbi.com//RequestMove"
+	PRECONDITION:
+		FACT Communication($communicationInstance);
+		FACT isro:BehaviorAddress($address);
+		FACT GLUtility($glUtility);
+		FACT ExtraUtility($helper);
+		//FACT OnRobotTaskStatus($robot, $status);
+		//$status == "Ready";
+		FACT isro:agent($agent);
+		
+	BODY:
+		PERFORM isro:startLog("PERFORM", "RequestMove");
+		
+		$actionID = $helper.getActionID($agent);
+			
+		$communicationInstance.request($address, "(move (actionID \"" + $actionID + "\") " + $path + ")");
+				
+		System.out.println("wait id" + $actionID);
+		WAIT actionCompleted($actionID);
+		RETRACT actionCompleted($actionID);
+			
+		PERFORM isro:endLog("PERFORM", "RequestMove");
+	UTILITY: 10; 
+}

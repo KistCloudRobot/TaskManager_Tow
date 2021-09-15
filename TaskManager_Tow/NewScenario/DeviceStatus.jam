@@ -1,0 +1,17 @@
+
+PREFIXES:
+			PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+
+
+PLAN ACHIEVE DeviceStatus($componentName, $status){
+	ID: "http://www.arbi.com//SetDevice"
+	NAME: "IoTSetDevice"
+	CONTEXT:
+		arbi:hasCapability($robot, "ContextReasoningCapability");
+	BODY:
+		PERFORM  isro:startLog("ACHIEVE", "DeviceStatus");
+		PERFORM  isro:requestToIoT($componentName,$status);
+		PERFORM  isro:endLog("ACHIEVE", "DeviceStatus");
+	UTILITY: 1;
+} 
+ 

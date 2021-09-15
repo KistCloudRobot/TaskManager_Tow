@@ -1,0 +1,42 @@
+PREFIXES:
+		PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+
+PLAN CONCLUDE PostDoorOpenedRequestedTo($executor, $goalID){
+	ID: "http://www.arbi.com//PostDoorOpenedRequestedTo"
+	PRECONDITION:
+		FACT Communication($communicationInstance);
+		FACT ExtraUtility($helper);
+		FACT isro:ReasonerAddress($reasoner);
+		FACT DoorStatus("Closed");
+	BODY:
+		PERFORM isro:startLog("ACHIEVE", "PostDoorOpenedRequestedTo");
+		
+		POST ACHIEVE DoorOpenedRequestedTo($executor, $goalID, $goal);
+		RETRACT PostDoorOpenedRequestedTo($executor, $goalID, $goal);
+		PERFORM isro:endLog("ACHIEVE", "PostDoorOpenedRequestedTo");
+}
+
+PLAN ACHIEVE DoorOpenedRequestedTo($executor, $goalID){
+	ID: "http://www.arbi.com//DoorOpenedRequestedTo"
+	PRECONDITION:
+		FACT Communication($communicationInstance);
+		FACT ExtraUtility($helper);
+		FACT isro:ReasonerAddress($reasoner);
+		FACT DoorStatus("Closed");
+	BODY:
+		PERFORM isro:startLog("ACHIEVE", "DoorOpenedRequestedTo");
+		
+		PERFORM  isro:UpdateAgentTaskStatus("DoorOpenedRequestedTo", "start");
+		
+		$executor = "Local";
+		$receiver = "agent://www.arbi.com/" + $executor + "/TaskManager";
+		$goalID = $helper.getGoalID("Tow1");
+		$data = "(GoalRequest (DoorOpened \"Tow1\" " + $goalID + "(argument)))";
+		$communicationInstance.request($receiver, $data);
+		
+		PERFORM WaitGoalReport($goalID);
+		
+		PERFORM  isro:UpdateAgentTaskStatus("DoorOpenedRequestedTo", "complete");		
+		$communicationInstance.inform($reasoner, "(goalComplete (DoorOpenedRequestedTo " + $executor +" " + $goalID + "))");
+		PERFORM isro:endLog("ACHIEVE", "DoorOpenedRequestedTo");
+}

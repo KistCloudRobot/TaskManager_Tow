@@ -1,0 +1,21 @@
+PREFIXES:
+		PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+
+PLAN perform StopCharge($location){
+	ID: "http://www.arbi.com//BuiltInPlan#StopCharge"
+	PRECONDITION:
+		FACT Communication($communicationInstance);
+		FACT isro:BehaviorAddress($address);
+		FACT GLUtility($glUtility);
+		FACT BatteryCharged($chargeStation);
+	BODY:
+		PERFORM  isro:startLog("PERFORM", "StopCharge");
+		PERFORM  UpdateAgentTaskStatus("StopCharge", "start");
+		
+		PERFORM RequestStationVertex($location, $vertex);
+		PERFORM isro:RequestChargeStop($vertex);
+		RETRACT BatteryCharged($chargeStation);
+		PERFORM UpdateAgentTaskStatus("StopCharge", "complete");
+		
+		PERFORM isro:endLog("PERFORM", "StopCharge");
+}

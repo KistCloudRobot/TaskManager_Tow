@@ -1,0 +1,47 @@
+import taskManager.utility.*;
+import taskManager.TaskManager;
+
+PREFIXES:
+	PREFIX arbi: <http://www.arbi.com//ontologies#>;
+	PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;		
+	PREFIX dinnerservice: <http://www.isro.com//dinnerservice#>;
+GOALS:
+	MAINTAIN alive  :UTILITY -10000;
+	PERFORM	boot;
+	
+FACTS:
+	FACT LOG;
+	FACT AGENT_ALIAS("TaskManager",	"agent://www.arbi.com/TaskManager" );
+	FACT CURRENT_TIME (0);
+
+OBSERVER: {
+	UPDATE (CURRENT_TIME ($time)) (CURRENT_TIME (System.currentTimeMillis()));
+	FACT TaskManager($tm);
+	$tm.dequeueMessage();
+}
+
+PLAN PERFORM boot() {
+	ID: "boot"
+	BODY:
+		
+		System.out.println("---Start Jam---");
+		RETRIEVE ExtraUtility($helper);
+		System.out.println("---Load plans---");
+		
+		$helper.loadPlan("plan/planList.jam");
+		
+		
+		PERFORM loadPlanPackage();
+		System.out.println("---Load Complete---");
+		
+		$helper.sleepAwhile(1000);
+		
+		//PERFORM isro:STTRequest();
+		
+		PERFORM UpdateAgentTaskStatus("mcARBI_LIFT1", "BOOT", "complete");
+
+		//$order = "(PhilipsHueOn \"true\")";
+		//perform isro:requestToIoT("agent://www.arbi.com/cloudAgent#PhilipsHueOn",$order);
+
+		System.out.println("---Boot Complete---");
+}

@@ -1,0 +1,38 @@
+PREFIXES:
+		PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+
+
+PLAN CONCLUDE PostRackAttached($object, $location) {
+	ID: "http://www.arbi.com//BuiltInPlan#PostRackAttached"
+	PRECONDITION:
+	BODY:
+		POST PERFORM RackAttached($object, $location);
+		RETRACT PostRackAttached($object, $location);
+	
+	UTILITY : 10000;
+}
+
+
+PLAN PERFORM RackAttached($object, $location){
+	ID: "http://www.arbi.com//BuiltInPlan#RackAttached"
+	PRECONDITION:
+		FACT Communication($communicationInstance);
+		FACT isro:BehaviorAddress($address);
+		FACT GLUtility($glUtility);
+		FACT RobotAt($robot, $vertex1, $vertex2);
+		FACT isro:ReasonerAddress($reasoner);
+		
+	BODY:
+		PERFORM  isro:startLog("PERFORM", "RackAttached");
+		PERFORM  isro:UpdateAgentTaskStatus("RackAttached", "start");
+		
+		PERFORM isro:QueryStationVertex($location, $stationVertex);
+		PERFORM isro:RequestLoad($stationVertex);
+		
+		PERFORM  isro:UpdateAgentTaskStatus("RackAttached", "complete");
+		PERFORM isro:endLog("PERFORM", "RackAttached");
+		
+		$communicationInstance.inform($reasoner, "(goalComplete (RackAttached \"" + $object +"\" \"" + $location + "\"))");
+	UTILITY: 10; 
+
+}

@@ -1,0 +1,34 @@
+
+PREFIXES:
+			PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+
+PLAN ACHIEVE TimeDelayed($meetingID){
+	ID: "http://www.arbi.com//announceThatMeetingCannotDelay"
+	NAME: "announceThatMeetingCannotDelay"
+	PRECONDITION:
+		FACT MeetingInformation($meetingID, $meetingName, $location, $startTime);
+		$importance == "high";
+	CONTEXT:
+		arbi:hasCapability($robot, "ContextReasoningCapability");
+	BODY:
+		PERFORM isro:QueryToKM($roomId,"rdf:fullname",$room);
+		PERFORM SpeakTo($person, $intention); 
+		PERFORM isro:endLog("ACHIEVE", "RoomPrepared");
+	UTILITY: 1;
+} 
+PLAN ACHIEVE TimeDelayed($meetingID){
+	ID: "http://www.arbi.com//DelayMeeting"
+	NAME: "DelayMeeting"
+	
+	PRECONDITION:
+		FACT MeetingInformation($meetingID, $meetingName, $location, $startTime);
+		$importance == "low";
+	CONTEXT:
+		arbi:hasCapability($robot, "ContextReasoningCapability");
+	BODY:
+		PERFORM isro:QueryToKM($roomId,"rdf:fullname",$room);
+		PERFORM SpeakTo($person, $intention); 
+		PERFORM ScheduleAdjusted($meetingID);
+		PERFORM isro:endLog("ACHIEVE", "RoomPrepared");
+	UTILITY: 1;
+} 

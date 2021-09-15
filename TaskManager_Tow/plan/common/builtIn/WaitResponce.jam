@@ -1,0 +1,16 @@
+PREFIXES:
+		PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+
+PLAN PERFORM WaitResponce($agent, $communicationID) {
+	ID : "http://www.arbi.com//BuiltInPlan#WaitResponce"
+	PRECONDITION :
+		FACT responceRecieved($agent, $communicationID);
+	BODY :
+		PERFORM  isro:startLog("PERFORM", "WaitResponce");
+		
+		System.out.println("wait responce of : " + $communicationID);
+		RETRACT responceRecieved($agent, $communicationID);
+		
+		PERFORM  isro:endLog("PERFORM", "WaitResponce");
+	UTILITY: 1; 
+}

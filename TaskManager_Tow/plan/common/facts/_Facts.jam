@@ -1,0 +1,35 @@
+PREFIXES:
+	//PREFIX dinnerservice: <http://www.isro.com//dinnerservice#>;
+	PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+	
+FACTS:	
+	
+	
+	/*
+	fact isro:robot("AMR_LIFT2");
+	fact isro:agent("Lift2");
+	fact OnAgentTaskStatus("Lift2", "wait", "wait");
+	fact RobotAt("AMR_LIFT2", 102,102);
+	fact RobotVelocity("AMR_LIFT2", 0);
+	fact BatteryRemain("AMR_LIFT2", 50);
+	fact OnRobotTaskStatus("AMR_LIFT2", "Ready");
+	
+	fact isro:robot("http://robot-arbi.kr/ontologies/isro_cap.owl#Jackal001");
+	fact Position("http://www.robot-arbi.kr/ontologies/EduService.owl#Person001", 0.2 ,0.2, 0);
+	fact isro:hasCapability("http://robot-arbi.kr/ontologies/isro_cap.owl#Jackal001","PerceptionModuleCapability");
+	fact isro:hasCapability("http://robot-arbi.kr/ontologies/isro_cap.owl#Jackal001","ContextInformationRequestCapability");
+	fact isro:hasCapability("http://robot-arbi.kr/ontologies/isro_cap.owl#Jackal001","KnowledgeInformationRequestCapability");
+	fact isro:currentUser("person001");
+	fact iotDevice("light","agent://www.arbi.com/virtualSensorAgent#ToggleLamp");
+	fact iotDevice("OffAirPurifier","agent://www.arbi.com/virtualSensorAgent#OffAirPurifier");
+	fact iotDevice("OnAirPurifier","agent://www.arbi.com/virtualSensorAgent#OnAirPurifier");
+	fact dinnerservice:Trashcan("trashcan001");
+	fact dinnerservice:AttendeeCount("dinnerService",0);
+	fact dinnerservice:TrashCount("dinnerService",0);
+	fact StockToCheckAmount(0);
+	fact FoodLeftAmount(1);
+	fact CurrentFoodLeft(1,"complexService:_blacktea", 70);
+	fact Idle;
+	fact handFree;
+	fact isro:robotArm("http://robot-arbi.kr/ontologies/isro_cap.owl#Jackal001","http://robot-arbi.kr/ontologies/isro_cap.owl#Jaco001");
+	*/

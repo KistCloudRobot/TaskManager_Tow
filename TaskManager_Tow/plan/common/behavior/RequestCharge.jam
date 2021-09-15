@@ -1,0 +1,29 @@
+PREFIXES:
+		PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+
+
+PLAN PERFORM isro:RequestCharge($vertex){
+	ID: "http://www.arbi.com//RequestCharge"
+	PRECONDITION:
+		FACT Communication($communicationInstance);
+		FACT isro:BehaviorAddress($address);
+		FACT GLUtility($glUtility);
+		FACT ExtraUtility($helper);
+		//FACT OnRobotTaskStatus($robot, $status);
+		//$status == "Ready";
+		FACT isro:agent($agent);
+		
+	BODY:
+		PERFORM isro:startLog("PERFORM", "RequestCharge");
+		
+		$actionID = $helper.getActionID($agent);
+			
+		$communicationInstance.request($address, "(charge (actionID \"" + $actionID + "\") " + $vertex + ")");
+				
+		System.out.println("wait id" + $actionID);
+		WAIT actionCompleted($actionID);
+		RETRACT actionCompleted($actionID);
+			
+		PERFORM isro:endLog("PERFORM", "RequestCharge");
+	UTILITY: 1; 
+}

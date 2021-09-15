@@ -1,0 +1,44 @@
+PREFIXES:
+		PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+
+PLAN perform CommunicateRequest($data, $address, $communicationID) {
+	ID: "http://www.arbi.com//BuiltInPlan#CommunicateRequest"
+	PRECONDITION :
+		FACT Communication($communicationInstance);
+		FACT TaskManager($tm);
+	BODY :
+		PERFORM  isro:startLog("PERFORM", "Communicate");
+		
+		$communicationInstance.request($address, $data);
+		$communicationID = $tm.getConversationID();
+		
+		PERFORM  isro:endLog("PERFORM", "Communicate");
+}
+
+PLAN perform CommunicateSend($data, $address, $communicationID) {
+	ID: "http://www.arbi.com//BuiltInPlan#CommunicateSend"
+	PRECONDITION :
+		FACT Communication($communicationInstance);
+		FACT TaskManager($tm);
+	BODY :
+		PERFORM  isro:startLog("PERFORM", "Communicate");
+		
+		$communicationInstance.send($address, $data);
+		$communicationID = $tm.getConversationID();
+		
+		PERFORM  isro:endLog("PERFORM", "Communicate");
+}
+
+PLAN perform CommunicateQeury($data, $address, $communicationID) {
+	ID: "http://www.arbi.com//BuiltInPlan#CommunicateQuery"
+	PRECONDITION :
+		FACT Communication($communicationInstance);
+		FACT TaskManager($tm);
+	BODY :
+		PERFORM  isro:startLog("PERFORM", "Communicate");
+		
+		$communicationInstance.sendQeury($address, $data);
+		$communicationID = $tm.getConversationID();
+		
+		PERFORM  isro:endLog("PERFORM", "Communicate");
+}

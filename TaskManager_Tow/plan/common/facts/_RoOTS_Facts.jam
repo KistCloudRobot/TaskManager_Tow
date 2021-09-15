@@ -1,0 +1,20 @@
+PREFIXES:
+	//PREFIX dinnerservice: <http://www.isro.com//dinnerservice#>;
+	PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+	
+	
+FACTS:	
+/*
+	fact RoleBinded("StoringManager", "Local");
+	fact RoleBinded("StoringCarrier", "Lift1");
+	fact RoleBinded("UnstoringManager", "Local");
+	fact RoleBinded("UnstoringLargeCarrier", "Lift1");
+	
+	fact ContextReader("RobotAt", "StoringManager");
+	fact ContextReader("RobotVelocity", "StoringManager");
+	fact ContextReader("onRobotTaskStatus", "StoringManager");
+	fact ContextReader("onAgentTaskStatus", "StoringManager");
+	
+	fact ContextCreator("onStation", "StoringManager");
+	fact ContextCreator("onStation", "UnstoringManager");
+	*/

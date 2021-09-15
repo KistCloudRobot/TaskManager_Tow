@@ -1,0 +1,22 @@
+
+PREFIXES:
+		PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+
+
+PLAN perform isro:QueryStationVertex($location, $vertex) {
+	ID: "http://www.arbi.com//BuiltInPlan#RequestStationVertex"
+	PRECONDITION :
+		FACT isro:ContextManagerAddress($address);
+		FACT Communication($communicationInstance);
+		FACT GLUtility($glUtility);
+	BODY :
+		PERFORM  isro:startLog("PERFORM", "isro:QueryStationVertex");
+		
+		$queryResult = $communicationInstance.sendQuery($address, "(StationVertex \"" + $location + "\" $vertex)");
+		
+		$vertex = $glUtility.retrieveGLExpression($queryResult, 1);
+		
+		PERFORM  isro:endLog("PERFORM", "isro:QueryStationVertex");
+	UTILITY : 10;
+	
+}

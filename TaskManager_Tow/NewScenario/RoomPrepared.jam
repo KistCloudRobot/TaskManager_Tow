@@ -1,0 +1,29 @@
+
+PREFIXES:
+			PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+
+PLAN CONCLUDE RoomPrepared($meetingID,$room){
+	ID: "http://www.arbi.com//ConcludePrepareRoomForMeeting"
+	NAME: "PrepareRoomForMeeting"
+	CONTEXT:
+	BODY:
+		PERFORM isro:startLog("CONCLUDE", "RoomPrepared");
+		POST ACHIEVE RoomPrepared($meetingID,$room);
+		PERFORM isro:endLog("CONCLUDE", "RoomPrepared");
+	UTILITY: 1;
+} 
+
+PLAN ACHIEVE RoomPrepared($meetingID,$room){
+	ID: "http://www.arbi.com//PrepareRoomForMeeting"
+	NAME: "PrepareRoomForMeeting"
+	CONTEXT:
+		isro:hasCapability($robot, "ContextReasoningCapability");
+	BODY:
+		PERFORM isro:startLog("ACHIEVE", "RoomPrepared");
+		PERFORM isro:QueryToKM($roomId,"rdf:fullname",$room);
+		PERFORM LocatedIn($robot, $roomId); 
+		ACHIEVE DeviceStatus("Light", $status); 
+		ACHIEVE DeviceStatus("Blinder", $status); 
+		PERFORM isro:endLog("ACHIEVE", "RoomPrepared");
+	UTILITY: 1;
+} 

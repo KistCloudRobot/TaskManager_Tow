@@ -1,0 +1,92 @@
+PLAN ACHIEVE MeetingPrepaerd($meetingID){
+	ID: "http://www.arbi.com//PrepareForMeeting"
+	NAME: PrepareForMeeting;
+	PRECONDITION:
+		FACT RequestReceived($user, $request);
+		$request == "prepareMeeting";
+	CONTEXT:
+		arbi:hasCapability($robot, "ContextReasoningCapability");
+	BODY:
+		ACHIEVE HasMeeting($meetingID); 
+		ACHIEVE MeetingInformationConfirmed($meetingID); 
+		ACHIEVE RoomPrepared($room); 
+		ACHIEVE MeetingAnnounced($meetingID); 
+		ACHIEVE FinalizeService($serviceID); 
+	UTILITY: 1;
+}
+
+PLAN ACHIEVE HasMeeting($meetingID){
+	ID: "http://www.arbi.com//RetrieveMeetingInformation"
+
+	NAME: RetrieveMeetingInformation;
+	PRECONDITION:
+
+	CONTEXT:
+		arbi:hasCapability($robot, "ContextReasoningCapability");
+	BODY:
+		PERFORM QueryToKM($s, $p, $intention); 
+		PERFORM AnalyzeMeetingInformation($meetingData); 
+	UTILITY: 1;
+} 
+
+PLAN PERFORM AnalyzeMeetingInformation($meetingData){
+	ID: "http://www.arbi.com//AnalyzeMeetingInformation"
+	NAME: AnalyzeMeetingInformation;
+	PRECONDITION:
+		
+	CONTEXT:
+		arbi:hasCapability($robot, "ContextReasoningCapability");
+	BODY:
+		System.out.println("plan started")
+	UTILITY: 1;
+} 
+ 
+PLAN ACHIEVE MeetingInformationConfirmed($meetingID){
+	ID: "http://www.arbi.com//RequestCheckingMeetingInformation"
+	NAME: RequestCheckingMeetingInformation;
+	PRECONDITION:
+		FACT MeetingInformation($meetingID, $meetingName, $location, $startTime, $importance);
+	CONTEXT:
+		arbi:hasCapability($robot, "ContextReasoningCapability");
+	BODY:
+		PERFORM SpeakTo($person, $intention); 
+	UTILITY: 1;
+} 
+ 
+PLAN ACHIEVE MeetingInformationConfirmed ($meetingID){
+	ID: "http://www.arbi.com//RequestMeetingInformation"
+	NAME: RequestMeetingInformation;
+	PRECONDITION:
+		
+	CONTEXT:
+		arbi:hasCapability($robot, "ContextReasoningCapability");
+	BODY:
+		PERFORM SpeakTo($person, $intention); 
+		ACHIEVE 	MeetingInformation($meetingID, $meetingName, $location, $startTime);
+	UTILITY: 1;
+} 
+
+PLAN ACHIEVE MeetingInformation($meetingID, $meetingName, $location, $startTime){
+	ID: "http://www.arbi.com//MeetingInformationNullPlan"
+	NAME: RequestMeetingInformation;
+	PRECONDITION:
+		FACT ;
+	CONTEXT:
+		arbi:hasCapability($robot, "ContextReasoningCapability");
+	BODY:
+		System.out.println("plan started")
+	UTILITY: 1;
+} 
+ 
+
+
+PLAN PERFORM FinalizeService($serviceID){
+	NAME: FinalizeMeetingService;
+	ID: "http://www.arbi.com//FinalizeMeetingService"
+	PRECONDITION:
+
+	CONTEXT:
+	BODY:
+		System.out.println("plan started");
+	UTILITY: 1;
+} 

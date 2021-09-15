@@ -1,0 +1,64 @@
+
+ PREFIXES:
+		PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+		
+PLAN CONCLUDE PalletTransportedRequestedFrom($manager, $goalID, $goal){
+	ID: "http://www.arbi.com//PalletTransportedRequestedFrom"
+	PRECONDITION:
+		FACT Communication($communicationInstance);
+		FACT GLUtility($glUtility);
+		FACT isro:ReasonerAddress($reasoner);
+	BODY:
+		PERFORM isro:startLog("CONCLUDE", "PalletTransportedRequestedFrom");
+		PERFORM isro:UpdateAgentTaskStatus("PalletTransportedRequestedFrom", "start");
+		
+		System.out.println("Requested Goal : " + $goal);
+		$manager = "Local";
+		PERFORM isro:UpdateAgentTaskStatus("PalletTransportedRequestedFrom", "complete");
+		PERFORM isro:endLog("CONCLUDE", "PalletTransportedRequestedFrom");
+		$communicationInstance.inform($reasoner, "(goalComplete (PalletTransportedRequestedFrom \"" + $manager +"\" " + $goalID + " " + $goal + "))");
+	UTILITY: 100; 
+}
+		
+		
+PLAN CONCLUDE PostPalletTransportedReportedTo($manager, $goalID, $goal) {
+	ID: "http://www.arbi.com//BuiltInPlan#PostPalletTransportedReportedTo"
+	BODY:
+		PERFORM isro:startLog("CONCLUDE", "PostPalletTransportedReportedTo");
+		
+		POST PERFORM PalletTransportedReportedTo($manager, $goalID, $goal);
+		RETRACT PostPalletTransportedReportedTo($manager, $goalID, $goal);
+		
+		PERFORM isro:endLog("CONCLUDE", "PostPalletTransportedReportedTo");
+		
+	UTILITY : 100000;
+}
+		
+PLAN PERFORM PalletTransportedReportedTo($manager, $goalID, $goal){
+	ID: "http://www.arbi.com//PalletTransportedReportedTo"
+	PRECONDITION:
+		FACT Communication($communicationInstance);
+		FACT GLUtility($glUtility);
+		FACT isro:ReasonerAddress($reasoner);
+	BODY:
+		PERFORM isro:startLog("PERFORM", "PalletTransportedReportedTo");
+		PERFORM isro:UpdateAgentTaskStatus("PalletTransportedReportedTo", "start");
+		
+		RETRIEVE PalletTransportedRequestedFrom($m, $gID, $g);
+		System.out.println($m);
+		System.out.println($gID);
+		System.out.println($g);
+		System.out.println("Report Goal : " + $goal);
+
+		$goal = $glUtility.escapeGL($goal);
+		$receiver = "agent://www.arbi.com/" + $manager + "/TaskManager";		
+		$communicationInstance.inform($receiver,"(GoalReport (PalletTransported \"Lift1\" \""+ $goalID + "\" \""+ $goal +"\"))");
+		
+		RETRACT PalletTransportedRequestedFrom($m, $gID, $g);
+		
+		PERFORM isro:UpdateAgentTaskStatus("PalletTransportedReportedTo", "complete");
+		PERFORM isro:endLog("PERFORM", "PalletTransportedReportedTo");
+		$communicationInstance.inform($reasoner, "(goalComplete (PalletTransportedReportedTo \"Local\" \"" + $goalID + "\" " + $goal + "))");
+		
+	UTILITY: 100; 
+}

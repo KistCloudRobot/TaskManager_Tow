@@ -1,0 +1,157 @@
+PREFIXES:
+		PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+
+PLAN CONCLUDE ContextRecieved($context){
+	ID: "http://www.arbi.com//BuiltInPlan#ContextRecievedDefault"
+	PRECONDITION:
+		FACT GLUtility($glUtility);
+	BODY:
+		PERFORM  isro:startLog("CONCLUDE", "ContextRecieved");
+		
+		System.out.println("no update : " + $context);
+		$glUtility.assertGL($context);
+		RETRACT ContextRecieved($context);
+		
+		PERFORM  isro:endLog("CONCLUDE", "ContextRecieved");
+	UTILITY : 10;
+}
+
+PLAN CONCLUDE ContextRecieved($context){
+
+	ID: "http://www.arbi.com//BuiltInPlan#ContextRecievedRobotAt"
+	PRECONDITION:
+		FACT GLUtility($glUtility);
+		$glUtility.retrieveGLName($context) == "RobotAt";
+	BODY:
+		PERFORM  isro:startLog("CONCLUDE", "ContextRecieved");
+		
+		$robot = $glUtility.retrieveGLExpression($context, 0);
+		
+		System.out.println("context Recieved RobotAt : ");
+		System.out.println($robot);
+		
+		RETRIEVE RobotAt($robot, $v1, $v2);
+		
+		System.out.println("context RETRIEVED RobotAt : ");
+		System.out.println($v1);
+		
+		RETRACT RobotAt($robot, $v1, $v2);
+		
+		$glUtility.assertGL($context);
+		
+		RETRACT ContextRecieved($context);
+		
+		PERFORM  isro:endLog("CONCLUDE", "ContextRecieved");
+	UTILITY : 100;
+}
+PLAN CONCLUDE ContextRecieved($context){
+
+	ID: "http://www.arbi.com//BuiltInPlan#ContextRecievedBatteryRemain"
+	PRECONDITION:
+		FACT GLUtility($glUtility);
+		$glUtility.retrieveGLName($context)  == "BatteryRemain";
+	BODY:
+		PERFORM  isro:startLog("CONCLUDE", "ContextRecieved");
+		
+		$robot = $glUtility.retrieveGLExpression($context, 0);
+		
+		System.out.println("context Recieved BatteryRemain : ");
+		System.out.println($robot);
+		RETRIEVE BatteryRemain($robot, $v1);
+		
+		System.out.println("context RETRIEVED BatteryRemain : ");
+		System.out.println($v1);
+		
+		RETRACT BatteryRemain($robot, $v1);
+		
+		$glUtility.assertGL($context);
+		RETRACT ContextRecieved($context);
+		
+		PERFORM  isro:endLog("CONCLUDE", "ContextRecieved");
+	UTILITY : 100;
+}
+
+
+PLAN CONCLUDE ContextRecieved($context){
+	ID: "http://www.arbi.com//BuiltInPlan#ContextRecievedRobotVelocity"
+	PRECONDITION:
+		FACT GLUtility($glUtility);
+		$glUtility.retrieveGLName($context) == "RobotVelocity";
+	BODY:
+		PERFORM  isro:startLog("CONCLUDE", "ContextRecieved");
+		
+		$robot = $glUtility.retrieveGLExpression($context, 0);
+		
+		System.out.println("context Recieved RobotVelocity : ");
+		System.out.println($robot);
+		RETRIEVE RobotVelocity($robot, $v1);
+		
+		System.out.println("context RETRIEVED RobotVelocity : ");
+		System.out.println($v1);
+		
+		
+		RETRACT RobotVelocity($robot, $v1);
+		$glUtility.assertGL($context);
+				
+		RETRACT ContextRecieved($context);
+		
+		PERFORM  isro:endLog("CONCLUDE", "ContextRecieved");
+	UTILITY : 100;
+}
+
+PLAN CONCLUDE ContextRecieved($context){
+	ID: "http://www.arbi.com//BuiltInPlan#ContextRecievedOnRobotTaskStatus"
+	PRECONDITION:
+		FACT GLUtility($glUtility);
+		$glUtility.retrieveGLName($context) == "OnRobotTaskStatus";
+	BODY:
+		PERFORM  isro:startLog("CONCLUDE", "ContextRecieved");
+		
+		$robot =  $glUtility.retrieveGLExpression($context, 0);
+		
+		System.out.println("context Recieved OnRobotTaskStatus : ");
+		System.out.println($robot);
+		
+		RETRIEVE OnRobotTaskStatus($robot, $v1);
+		
+		System.out.println("context RETRIEVED OnRobotTaskStatus : ");
+		System.out.println($v1);
+		
+		
+		RETRACT OnRobotTaskStatus($robot, $v1);
+		
+		$glUtility.assertGL($context);
+				
+		RETRACT ContextRecieved($context);
+		
+		PERFORM  isro:endLog("CONCLUDE", "ContextRecieved");
+	UTILITY : 100;
+}
+
+PLAN CONCLUDE ContextRecieved($context){
+	ID: "http://www.arbi.com//BuiltInPlan#ContextRecievedOnAgentTaskStatus"
+	PRECONDITION:
+		FACT GLUtility($glUtility);
+		$glUtility.retrieveGLName($context) == "OnAgentTaskStatus";
+	BODY:
+		PERFORM  isro:startLog("CONCLUDE", "ContextRecieved");
+		
+		$agent = $glUtility.retrieveGLExpression($context, 0);
+		System.out.println("context Recieved OnAgentTaskStatus : ");
+		System.out.println($agent);
+		
+		RETRIEVE OnAgentTaskStatus($robot, $v1, $v2);
+		
+		System.out.println("context RETRIEVED OnAgentTaskStatus : ");
+		System.out.println($v1);
+		
+		
+		RETRACT OnAgentTaskStatus($agent, $v1, $v2);
+		$glUtility.assertGL($context);
+				
+		RETRACT ContextRecieved($context);
+		
+		PERFORM  isro:endLog("CONCLUDE", "ContextRecieved");
+	UTILITY : 100;
+}
+

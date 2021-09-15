@@ -1,0 +1,21 @@
+PREFIXES:
+		PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+
+
+PLAN CONCLUDE Stop(){
+	ID: "http://www.arbi.com//BuiltInPlan#StopMove"
+	PRECONDITION:
+		FACT Communication($communicationInstance);
+		FACT isro:BehaviorAddress($address);
+		FACT GLUtility($glUtility);
+		FACT ExtraUtility($helper);
+		
+	BODY:
+		PERFORM isro:startLog("PERFORM", "StopMove");
+		
+		PERFORM isro:RequestCancelMove();
+		PERFORM isro:WaitRobotPath();
+			
+		PERFORM isro:endLog("PERFORM", "StopMove");
+	UTILITY: 1; 
+}

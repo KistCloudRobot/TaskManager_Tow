@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/Jena"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/collection-0.7.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/commons-cli-1.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/commons-codec-1.11.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/commons-compress-1.17.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/commons-csv-1.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/commons-io-2.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/commons-lang3-3.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/httpclient-4.5.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/httpclient-cache-4.5.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/httpcore-4.4.9.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/jackson-annotations-2.9.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/jackson-core-2.9.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/jackson-databind-2.9.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/jcl-over-slf4j-1.7.25.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/jena-arq-3.8.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/jena-base-3.8.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/jena-cmds-3.8.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/jena-core-3.8.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/jena-dboe-base-3.8.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/jena-dboe-index-3.8.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/jena-dboe-trans-data-3.8.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/jena-dboe-transaction-3.8.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/jena-iri-3.8.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/jena-rdfconnection-3.8.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/jena-shaded-guava-3.8.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/jena-tdb-3.8.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/jena-tdb2-3.8.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/jsonld-java-0.12.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/libthrift-0.10.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/log4j-1.2.17.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/slf4j-api-1.7.25.jar"/>
+	<classpathentry exported="true" kind="lib" path="apache-jena-3.8.0/lib/slf4j-log4j12-1.7.25.jar"/>
+	<classpathentry exported="true" kind="lib" path="javax.xml.bind.jar"/>
+	<classpathentry exported="true" kind="lib" path="json-simple-1.1.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Jam(0.7.1)"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ARBIFramework-1.2d"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

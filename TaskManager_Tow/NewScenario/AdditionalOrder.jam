@@ -1,0 +1,28 @@
+PREFIXES:
+			PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+
+PLAN PERFORM AdditionalOrder($user, $order){
+	ID: "http://www.arbi.com//WaitAdditionalOrder"
+	NAME: "WaitAdditionalOrder"
+	PRECONDITION:
+	CONTEXT:
+		arbi:hasCapability($robot, "ContextReasoningCapability");
+	BODY:
+		PERFORM  isro:startLog("ACHIEVE", "AdditionalOrder");
+		ACHIEVE TimeDelayed($meetingID); 
+		PERFORM  isro:endLog("ACHIEVE", "AdditionalOrder");
+		
+	UTILITY: 1;
+} 
+
+PLAN PERFORM ScheduleAdjusted($person, $intention){
+	ID: "http://www.arbi.com//AdjustSchedule"
+	NAME: "AdjustSchedule"
+	PRECONDITION:
+
+	CONTEXT:
+		arbi:hasCapability($robot, "ContextReasoningCapability");
+	BODY:
+		System.out.println("plan started");
+	UTILITY: 1;
+} 

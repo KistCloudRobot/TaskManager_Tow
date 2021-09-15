@@ -1,0 +1,23 @@
+PREFIXES:
+		PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+
+PLAN ACHIEVE BatteryCharged($location){
+	ID: "http://www.arbi.com//BuiltInPlan#BatteryCharged"
+	PRECONDITION:
+		FACT Communication($communicationInstance);
+		FACT isro:BehaviorAddress($address);
+		FACT GLUtility($glUtility);
+		FACT RobotAt($robot, $vertex1, $vertex2);
+	BODY:
+		PERFORM  isro:startLog("PERFORM", "BatteryCharged");
+		PERFORM  UpdateAgentTaskStatus("BatteryCharged", "start");
+		
+		PERFORM MoveToLocation($location);
+		PERFORM ChargingBatteryAt($location);
+		
+		PERFORM UpdateAgentTaskStatus("BatteryCharged", "complete");
+		
+		PERFORM isro:endLog("PERFORM", "BatteryCharged");
+	UTILITY: 1; 
+}
+

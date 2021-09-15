@@ -1,0 +1,30 @@
+GOALS:
+	MAINTAIN alive  :UTILITY -10000;
+	PERFORM	boot;
+	
+PLAN PERFORM boot() {
+	BODY:
+		
+		System.out.println("---Start Jam---");
+
+		PERFORM hanoi(2,"1","2","3");
+		System.out.println("---Load Complete---");
+}
+
+
+PLAN PERFORM hanoi($depth,$from,$by,$to){
+	PRECONDITION:
+		$depth < 1;
+	BODY:
+		System.out.println("from : " + $from + " to :" + $to);
+		
+}
+
+
+PLAN PERFORM hanoi($depth,$from,$by,$to){
+	BODY:
+		$newDepth = $depth - 1;
+		PERFORM hanoi($newDepth,$from,$to,$by);
+		System.out.println("1from : " + $from + " to :" + $to);
+		PERFORM hanoi($newDepth,$by,$from,$to);
+}

@@ -1,0 +1,94 @@
+PREFIXES:
+		PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+
+PLAN CONCLUDE PostMoveToLocation($location) {
+	ID: "http://www.arbi.com//BuiltInPlan#PostMoveToLocation"
+	PRECONDITION:
+	BODY:
+		POST PERFORM MoveToLocation($location);
+		RETRACT PostMoveToLocation($location);
+	UTILITY : 10000;
+}
+
+
+PLAN perform MoveToLocation($location){
+	ID: "http://www.arbi.com//BuiltInPlan#MoveToLocation"
+	PRECONDITION:
+		FACT Communication($communicationInstance);
+		FACT isro:BehaviorAddress($address);
+		FACT GLUtility($glUtility);
+		FACT RobotAt($robot, $vertex1, $vertex2);
+		FACT  isro:ReasonerAddress($reasoner);
+		
+	BODY:
+		PERFORM  isro:startLog("PERFORM", "MoveToLocation");
+		PERFORM  isro:UpdateAgentTaskStatus("MoveToLocation", "start");
+		
+		PERFORM  isro:QueryPreparationVertex($location, $preparationVertex);
+		PERFORM  isro:RequestRobotPath($vertex1, $preparationVertex, $path);
+		
+		PERFORM  isro:RequestMove($path);
+		
+		PERFORM  isro:UpdateAgentTaskStatus("MoveToLocation", "complete");
+		PERFORM  isro:endLog("PERFORM", "MoveToLocation");
+		$communicationInstance.inform($reasoner, "(goalComplete (MoveToLocation \"" + $location +"\"))");
+	UTILITY: 10; 
+}
+/*
+PLAN perform MoveToLocation($location){
+	ID: "http://www.arbi.com//BuiltInPlan#MoveToLocation222"
+	PRECONDITION:
+		FACT Communication($communicationInstance);
+		FACT isro:BehaviorAddress($address);
+		FACT GLUtility($glUtility);
+		FACT RobotAt($robot, $vertex1, $vertex2);
+		FACT  isro:ReasonerAddress($reasoner);
+		
+	BODY:
+		PERFORM  isro:startLog("PERFORM", "MoveToLocation");
+		PERFORM  isro:UpdateAgentTaskStatus("MoveToLocation", "start");
+		PERFORM  isro:argumentLog("robot", $robot);
+		PERFORM  isro:argumentLog("location", $location);
+		
+		PERFORM  isro:QueryPreparationVertex($location);
+		PERFORM  isro:RequestRobotPath($vertex2, $preparationVertex, $path);
+		
+		RETRACT  PrepartionVertex($location, $preparationVertex);
+		PERFORM  isro:RequestMove($path);
+		
+		PERFORM  isro:UpdateAgentTaskStatus("MoveToLocation", "complete");
+		PERFORM  isro:endLog("PERFORM", "MoveToLocation");
+		
+		$communicationInstance.inform($reasoner, "(goalComplete (MoveToLocation \"" + $location +"\"))");
+	UTILITY: 1; 
+}
+*/
+
+PLAN perform MoveToLocation($location){
+	ID: "http://www.arbi.com//BuiltInPlan#MoveToLocationStopCharge"
+	PRECONDITION:
+		FACT Communication($communicationInstance);
+		FACT isro:BehaviorAddress($address);
+		FACT GLUtility($glUtility);
+		FACT RobotAt($robot, $vertex1, $vertex2);
+		FACT BatteryCharged($chargeStation);
+		FACT  isro:ReasonerAddress($reasoner);
+	BODY:
+		PERFORM  isro:startLog("PERFORM", "MoveToLocation");
+		PERFORM  UpdateAgentTaskStatus("MoveToLocation", "start");
+		PERFORM  isro:argumentLog("robot", $robot);
+		PERFORM  isro:argumentLog("location", $location);
+				
+		PERFORM StopCharge($chargeStation);
+		PERFORM isro:QueryPreparationVertex($location, $preparationVertex);
+		
+		PERFORM RequestRobotPath($vertex2, $preparationVertex, $path);
+		PERFORM isro:RequestMove($path);
+		
+		PERFORM UpdateAgentTaskStatus("MoveToLocation", "complete");
+		PERFORM isro:endLog("PERFORM", "MoveToLocation");
+		
+		$communicationInstance.inform($reasoner, "(goalComplete (MoveToLocation \"" + $location +"\"))");
+	UTILITY : 11;
+}
+

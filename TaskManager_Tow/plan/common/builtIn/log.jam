@@ -1,0 +1,130 @@
+PREFIXES:
+	PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+
+
+/**
+ * @package_name	: common
+ * @filename		: log.jam
+ * @author			: �ֺ���
+ * @created_date	: 2011-03-15
+ * @updated_date	: 
+ *
+ * 
+ */
+ 
+
+
+ 
+PLAN PERFORM isro:startLog($behave, $name) {
+	ID: "http://www.arbi.com//StartLogOn"
+	NAME:
+		"Start Log"
+	
+	PRECONDITION:
+		FACT LOG;
+		
+	BODY:
+		System.out.println("JAM PLAN "+$behave+" "+$name);
+		
+}
+PLAN PERFORM isro:startLog($behave, $name) {
+	ID: "http://www.arbi.com//StartLogOff"
+	NAME:
+		"Start Log"
+	
+	PRECONDITION:
+	
+	UTILITY:-1;
+		
+	BODY:
+		
+}
+
+PLAN PERFORM isro:endLog($behave, $name) {
+	ID: "http://www.arbi.com//EndLogOn"
+	NAME:
+		"end Log"
+	
+	PRECONDITION:
+		FACT LOG;
+		
+	BODY:
+		System.out.println("JAM PLAN "+$behave+" "+$name+"EXECUTED");
+		
+}
+PLAN PERFORM isro:endLog($behave, $name) {
+	ID: "http://www.arbi.com//EndLogOff"
+	NAME:
+		"end Log"
+	
+	PRECONDITION:
+	
+	UTILITY:-1;
+		
+	BODY:
+		
+}
+PLAN PERFORM isro:argumentLog($argument, $value){
+	ID: "http://www.arbi.com//ArgumentLogOn"
+	NAME:
+		"argument Log"
+	
+	PRECONDITION:
+		FACT LOG;
+		
+	BODY:
+		System.out.println("	"+$argument+" : "+ $value);
+		
+}
+PLAN PERFORM isro:argumentLog($argument, $value) {
+	ID: "http://www.arbi.com//ArgumentLogOff"
+	NAME:
+		"argument Log"
+	
+	PRECONDITION:
+		
+	UTILITY:-1;
+		
+	BODY:
+		
+}
+PLAN PERFORM isro:planNotSatisfied(){
+	ID: "http://www.arbi.com//PlanNotSatisfiedOn"
+	PRECONDITION:
+		FACT LOG;
+	BODY:
+		System.out.println("	Plan Precondition not Satisfied");	
+}
+PLAN PERFORM isro:planNotSatisfied(){
+	ID: "http://www.arbi.com//PlanNotSatisfiedOff"
+	UTILITY:-1;
+	BODY:
+}
+
+PLAN PERFORM isro:loadFail(){
+	ID: "http://www.arbi.com//LoadFailOn"
+	PRECONDITION:
+		FACT LOG;
+	BODY:
+		System.out.println("	DataBase is not Loaded");
+}
+
+PLAN PERFORM isro:loadFail(){
+	ID: "http://www.arbi.com//LoadFailOff"
+	UTILITY:-1;
+	BODY:
+}
+
+PLAN PERFORM isro:expressionNotSupport(){
+	ID: "http://www.arbi.com//ExpressionNotSupportOn"
+	PRECONDITION:
+		FACT LOG;
+	BODY:
+		System.out.println("	Behavior Expression is not Support");
+}
+
+PLAN PERFORM isro:expressionNotSupport(){
+	ID: "http://www.arbi.com//ExpressionNotSupportOff"
+	UTILITY:-1;
+	BODY:
+}

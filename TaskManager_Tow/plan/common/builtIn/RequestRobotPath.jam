@@ -1,0 +1,27 @@
+PREFIXES:
+		PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+
+
+PLAN perform isro:RequestRobotPath($startVertex, $endVertex, $path) {
+	ID: "http://www.arbi.com//BuiltInPlan#RequestRobotPath"
+	PRECONDITION :
+		FACT isro:NavigationControllerAddress($address);
+		FACT Communication($communicationInstance);
+		FACT GLUtility($glUtility);
+		FACT isro:robot($robot);
+	BODY :
+		PERFORM  isro:startLog("PERFORM", "RequestRobotPath");
+		
+		$data = "(RobotPath \"" + $robot + "\" " + $startVertex +" "+ $endVertex +" $path)";
+		
+		$result = $communicationInstance.request($address, $data);
+		
+		$path = $glUtility.retrieveGLExpression($result, 1);
+		
+		System.out.println("path is " + $path);
+		
+		PERFORM  isro:endLog("PERFORM", "RequestRobotPath");
+	UTILITY: 1; 
+}
+
+

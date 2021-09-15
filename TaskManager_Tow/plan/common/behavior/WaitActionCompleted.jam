@@ -1,0 +1,13 @@
+PREFIXES:
+		PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+
+plan perform WaitActionCompleted($actionID){
+	id : "WaitActionCompleted"
+	precondition :
+		fact actionCompleted($actionID);
+	body:
+		
+	UTILITY: 1; 
+}
+
+	

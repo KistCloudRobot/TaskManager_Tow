@@ -1,0 +1,10 @@
+
+PLAN PERFORM WaitGoalReport($goalID){
+	ID: "http://www.arbi.com//WaitGoalReport"
+	PRECONDITION:
+		FACT GLUtility($glUtility);
+		FACT GoalReport($executor, $goalID, $result);
+	BODY:
+		$glUtility.assertGL($result);
+		RETRACT GoalReport($executor, $goalID, $result);
+}
