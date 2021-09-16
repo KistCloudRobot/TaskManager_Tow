@@ -58,7 +58,7 @@ public class TaskManager_Tow extends ArbiAgent {
 		initAddress();
 		
 		ArbiAgentExecutor.execute("tcp://" + ENV_JMS_BROKER, AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + BASE_AGENT_NAME, this,2);
-		interpreter = JAM.parse(new String[] { "plan/boot.jam" });
+		interpreter = JAM.parse(new String[] { "TaskManagerPlan/boot.jam" });
 		messageQueue = new LinkedBlockingQueue<RecievedMessage>();
 		
 		msgManager = new GLMessageManager(interpreter);
