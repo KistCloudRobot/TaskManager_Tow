@@ -28,7 +28,7 @@ PLAN PERFORM boot() {
 		RETRIEVE ExtraUtility($helper);
 		System.out.println("---Load plans---");
 		
-		$helper.loadPlan("TaskManagerPlan/planList.jam");
+		$helper.loadPlan("./TaskManagerPlan/planList.jam");
 		
 		
 		PERFORM loadPlanPackage();

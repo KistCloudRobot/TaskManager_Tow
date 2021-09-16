@@ -6,8 +6,8 @@ Plan PERFORM loadPlanPackage(){
 	PRECONDITION:
 		FACT ExtraUtility($helper);
 	BODY:
-		$helper.loadPlanPackage("TaskManagerPlan/intelligence");
-		$helper.loadPlanPackage("TaskManagerPlan/task");
-		$helper.loadPlanPackage("TaskManagerPlan/common");
-		$helper.loadPlanPackage("TaskManagerPlan/external");
+		$helper.loadPlanPackage("./TaskManagerPlan/intelligence");
+		$helper.loadPlanPackage("./TaskManagerPlan/task");
+		$helper.loadPlanPackage("./TaskManagerPlan/common");
+		$helper.loadPlanPackage("./TaskManagerPlan/external");
 }
