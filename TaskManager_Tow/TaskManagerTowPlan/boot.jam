@@ -11,7 +11,7 @@ GOALS:
 	
 FACTS:
 	FACT LOG;
-	FACT AGENT_ALIAS("TaskManager",	"agent://www.arbi.com/TaskManager" );
+	//FACT AGENT_ALIAS("TaskManager",	"agent://www.arbi.com/TaskManager" );
 	FACT CURRENT_TIME (0);
 
 OBSERVER: {
@@ -28,7 +28,7 @@ PLAN PERFORM boot() {
 		RETRIEVE ExtraUtility($helper);
 		System.out.println("---Load plans---");
 		
-		$helper.loadPlan("./TaskManagerPlan/planList.jam");
+		$helper.loadPlan("./TaskManagerTowPlan/planList.jam");
 		
 		
 		PERFORM loadPlanPackage();
@@ -38,7 +38,7 @@ PLAN PERFORM boot() {
 		
 		//PERFORM isro:STTRequest();
 		
-		PERFORM UpdateAgentTaskStatus("mcARBI_LIFT1", "BOOT", "complete");
+		//PERFORM UpdateAgentTaskStatus("mcARBI_LIFT1", "BOOT", "complete");
 
 		//$order = "(PhilipsHueOn \"true\")";
 		//perform isro:requestToIoT("agent://www.arbi.com/cloudAgent#PhilipsHueOn",$order);
