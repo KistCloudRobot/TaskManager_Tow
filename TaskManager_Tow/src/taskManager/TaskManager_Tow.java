@@ -1,6 +1,8 @@
 package taskManager;
 
 import java.io.BufferedWriter;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Scanner;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -63,20 +65,26 @@ public class TaskManager_Tow extends ArbiAgent {
 		
 		msgManager = new GLMessageManager(interpreter);
 		
-		aplViewer = new APLViewer(interpreter);
+//		aplViewer = new APLViewer(interpreter);
 		//logger = new TaskManagerLogger(this,interpreter);
 		init();
 	}
 	
 
 	public void initAddress() {
-		ENV_JMS_BROKER = System.getenv("JMS_BROKER");
-		ENV_AGENT_NAME = System.getenv("AGENT");
-		ENV_ROBOT_NAME = System.getenv("ROBOT");
-		
-		CONTEXTMANAGER_ADRESS =  AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + "/ContextManager"; 
-		REASONER_ADRESS =  AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + "/TaskReasoner"; 
-		BEHAVIOUR_INTERFACE_ADDRESS = AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + "/BehaviorInterface"; 
+		try {
+			String ip = InetAddress.getLocalHost().getHostAddress();
+			ENV_JMS_BROKER = ip + ":61316";
+			ENV_AGENT_NAME = System.getenv("AGENT");
+			ENV_ROBOT_NAME = System.getenv("ROBOT");
+			
+			CONTEXTMANAGER_ADRESS =  AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + "/ContextManager"; 
+			REASONER_ADRESS =  AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + "/TaskReasoner"; 
+			BEHAVIOUR_INTERFACE_ADDRESS = AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + "/BehaviorInterface"; 
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public void test(){
 		
@@ -116,13 +124,6 @@ public class TaskManager_Tow extends ArbiAgent {
 		};
 		
 		t.start();
-		
-		
-		while(true) {
-			Scanner sc = new Scanner(System.in);
-			String input = sc.nextLine();
-			dc.assertFact(input);
-		}
 	}
 	
 	public String getConversationID() {
