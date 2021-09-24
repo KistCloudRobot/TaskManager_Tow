@@ -29,7 +29,7 @@ public class TaskManager_Tow extends ArbiAgent {
 	private BlockingQueue<RecievedMessage> messageQueue;
 	private TaskManagerLogger logger;
 	private boolean isTriggered = false;
-	private APLViewer aplViewer;
+//	private APLViewer aplViewer;
 	
 	public static String ENV_JMS_BROKER;
 	public static String ENV_AGENT_NAME;
@@ -133,7 +133,7 @@ public class TaskManager_Tow extends ArbiAgent {
 	@Override
 	public void onNotify(String sender, String notification) {
 		System.out.println("recieved Notify from " + sender + " : " + notification);
-		aplViewer.msgReceived(notification, sender);
+//		aplViewer.msgReceived(notification, sender);
 		RecievedMessage msg = new RecievedMessage(sender, notification);
 		messageQueue.add(msg);	
 	}
@@ -179,7 +179,7 @@ public class TaskManager_Tow extends ArbiAgent {
 				String data = message.getMessage();
 				String sender = message.getSender();
 
-				aplViewer.msgReceived(data, sender);
+//				aplViewer.msgReceived(data, sender);
 
 				gl = GLFactory.newGLFromGLString(data);
 
@@ -236,7 +236,7 @@ public class TaskManager_Tow extends ArbiAgent {
 	public String onQuery(String sender, String query) {
 		System.out.println("recieved query from " + sender + " : " + query);
 
-		aplViewer.msgReceived(query, sender);
+//		aplViewer.msgReceived(query, sender);
 
 		String result = handleQuery(query);
 
