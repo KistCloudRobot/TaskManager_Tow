@@ -37,9 +37,6 @@ PLAN PERFORM boot() {
 		$helper.sleepAwhile(1000);
 		
 		//PERFORM isro:STTRequest();
-		
-		//PERFORM UpdateAgentTaskStatus("mcARBI_LIFT1", "BOOT", "complete");
-
 		//$order = "(PhilipsHueOn \"true\")";
 		//perform isro:requestToIoT("agent://www.arbi.com/cloudAgent#PhilipsHueOn",$order);
 

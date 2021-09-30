@@ -72,19 +72,13 @@ public class TaskManager_Tow extends ArbiAgent {
 	
 
 	public void initAddress() {
-		try {
-			String ip = InetAddress.getLocalHost().getHostAddress();
-			ENV_JMS_BROKER = ip + ":61316";
-			ENV_AGENT_NAME = System.getenv("AGENT");
-			ENV_ROBOT_NAME = System.getenv("ROBOT");
-			
-			CONTEXTMANAGER_ADRESS =  AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + "/ContextManager"; 
-			REASONER_ADRESS =  AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + "/TaskReasoner"; 
-			BEHAVIOUR_INTERFACE_ADDRESS = AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + "/BehaviorInterface"; 
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		ENV_JMS_BROKER = System.getenv("JMS_BROKER");
+		ENV_AGENT_NAME = System.getenv("AGENT");
+		ENV_ROBOT_NAME = System.getenv("ROBOT");
+		
+		CONTEXTMANAGER_ADRESS =  AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + "/ContextManager"; 
+		REASONER_ADRESS =  AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + "/TaskReasoner"; 
+		BEHAVIOUR_INTERFACE_ADDRESS = AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + "/BehaviorInterface"; 
 	}
 	public void test(){
 		

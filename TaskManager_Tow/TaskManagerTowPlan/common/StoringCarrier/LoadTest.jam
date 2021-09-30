@@ -1,0 +1,20 @@
+PREFIXES:
+		PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+
+PLAN CONCLUDE LoadTest($vertex){
+	ID: "http://www.arbi.com//BuiltInPlan#LoadTest"
+	PRECONDITION:
+		FACT Communication($communicationInstance);
+		FACT isro:BehaviorAddress($address);
+		FACT GLUtility($glUtility);
+		
+	BODY:
+		PERFORM  isro:startLog("PERFORM", "LoadTest");
+				
+		PERFORM  isro:RequestLoad($vertex);
+		
+		PERFORM  isro:endLog("PERFORM", "LoadTest");
+		
+		RETRACT LoadTest($vertex);
+	UTILITY: 10000; 
+}

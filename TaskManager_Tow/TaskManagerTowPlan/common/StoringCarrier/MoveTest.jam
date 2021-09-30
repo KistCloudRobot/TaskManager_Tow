@@ -1,0 +1,23 @@
+PREFIXES:
+		PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+
+PLAN CONCLUDE MoveTest($vertex){
+	ID: "http://www.arbi.com//BuiltInPlan#MoveTest"
+	PRECONDITION:
+		FACT Communication($communicationInstance);
+		FACT isro:BehaviorAddress($address);
+		FACT GLUtility($glUtility);
+		FACT RobotAt($robot, $vertex1, $vertex2);
+		
+	BODY:
+		PERFORM  isro:startLog("PERFORM", "MoveTest");
+		
+		PERFORM  isro:RequestRobotPath($vertex1, $vertex, $path);
+		
+		PERFORM  isro:RequestMove($path);
+		
+		PERFORM  isro:endLog("PERFORM", "MoveTest");
+		
+		RETRACT MoveTest($vertex);
+	UTILITY: 10000; 
+}
