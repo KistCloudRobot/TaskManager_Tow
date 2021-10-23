@@ -59,7 +59,7 @@ public class TaskManager_Tow extends ArbiAgent {
 
 		initAddress();
 		
-		ArbiAgentExecutor.execute("tcp://" + ENV_JMS_BROKER, AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + BASE_AGENT_NAME, this,2);
+		ArbiAgentExecutor.execute(ENV_JMS_BROKER, AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + BASE_AGENT_NAME, this,2);
 		interpreter = JAM.parse(new String[] { "./TaskManagerTowPlan/boot.jam" });
 		messageQueue = new LinkedBlockingQueue<RecievedMessage>();
 		
@@ -72,10 +72,12 @@ public class TaskManager_Tow extends ArbiAgent {
 	
 
 	public void initAddress() {
-		ENV_JMS_BROKER = System.getenv("JMS_BROKER");
-		ENV_AGENT_NAME = System.getenv("AGENT");
-		ENV_ROBOT_NAME = System.getenv("ROBOT");
-		
+		//ENV_JMS_BROKER = "tcp://" + System.getenv("JMS_BROKER");
+		//ENV_AGENT_NAME = System.getenv("AGENT");
+		//ENV_ROBOT_NAME = System.getenv("ROBOT");
+		ENV_JMS_BROKER = "tcp://" + System.getenv("JMS_BROKER") + ":61113";
+		ENV_AGENT_NAME = "Tow2";
+		ENV_ROBOT_NAME = "AMR_TOW2";
 		CONTEXTMANAGER_ADRESS =  AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + "/ContextManager"; 
 		REASONER_ADRESS =  AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + "/TaskReasoner"; 
 		BEHAVIOUR_INTERFACE_ADDRESS = AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + "/BehaviorInterface"; 
@@ -136,7 +138,7 @@ public class TaskManager_Tow extends ArbiAgent {
 	public void onStart() {
 		dc = new TaskManagerDataSource(this);
 
-		dc.connect("tcp://" + ENV_JMS_BROKER, DATASOURCE_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + BASE_AGENT_NAME,2);
+		dc.connect(ENV_JMS_BROKER, DATASOURCE_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + BASE_AGENT_NAME,2);
 
 		System.out.println("======Start Test Agent======");
 		System.out.println("??");
