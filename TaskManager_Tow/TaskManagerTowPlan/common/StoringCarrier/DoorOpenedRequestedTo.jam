@@ -30,8 +30,8 @@ PLAN ACHIEVE DoorOpenedRequestedTo($executor, $goalID){
 		
 		$executor = "Local";
 		$receiver = "agent://www.arbi.com/" + $executor + "/TaskManager";
-		$goalID = $helper.getGoalID("Tow1");
-		$data = "(GoalRequest (DoorOpened \"Tow1\" " + $goalID + "(argument)))";
+		$goalID = $helper.getGoalID("Tow2");
+		$data = "(GoalRequest (DoorOpened \"Tow2\" " + $goalID + "(argument)))";
 		$communicationInstance.request($receiver, $data);
 		
 		PERFORM WaitGoalReport($goalID);

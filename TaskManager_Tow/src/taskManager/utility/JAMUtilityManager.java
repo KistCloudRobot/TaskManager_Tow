@@ -80,14 +80,14 @@ public class JAMUtilityManager {
 	}
 	
 	public void sleepAwhile(int miliSecond) {
-		System.out.println("start wait");
+	
 		try {
 			Thread.sleep(miliSecond);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("wait finished");
+	
 	}
 	public String dateCalculation(int argDate, int argHour){
 		Calendar calendar = Calendar.getInstance();

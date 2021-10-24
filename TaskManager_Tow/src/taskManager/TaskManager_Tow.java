@@ -37,15 +37,15 @@ public class TaskManager_Tow extends ArbiAgent {
 	public static final String ARBI_PREFIX = "www.arbi.com/";
 	public static final String BASE_AGENT_NAME = "/TaskManager";
 	
-	public static final String JMS_BROKER_URL = "tcp://172.16.165.204:61114";
+	public static final String JMS_BROKER_URL = "tcp://172.16.165.204:61112";
 	//public static final String JMS_BROKER_URL = "tcp://localhost:61616";
-	public static final String TASKMANAGER_ADRESS = "www.arbi.com/Tow1/TaskManager";
-	public static  String CONTEXTMANAGER_ADRESS = "agent://www.arbi.com/Tow1/ContextManager";
-	public static  String KNOWLEDGEMANAGER_ADRESS = "agent://www.arbi.com/Tow1/KnowledgeManager";
-	public static  String BEHAVIOUR_INTERFACE_ADDRESS = "agent://www.arbi.com/Tow1/BehaviourInterface";
+	public static final String TASKMANAGER_ADRESS = "www.arbi.com/Tow2/TaskManager";
+	public static  String CONTEXTMANAGER_ADRESS = "agent://www.arbi.com/Tow2/ContextManager";
+	public static  String KNOWLEDGEMANAGER_ADRESS = "agent://www.arbi.com/Tow2/KnowledgeManager";
+	public static  String BEHAVIOUR_INTERFACE_ADDRESS = "agent://www.arbi.com/Tow2/BehaviourInterface";
 	public static final String PERCEPTION_ADRESS = "agent://www.arbi.com/perception";
-	public static final String ACTION_ADRESS = "agent://www.arbi.com/Tow1/action";
-	public static  String REASONER_ADRESS = "agent://www.arbi.com/Tow1/TaskReasoner";
+	public static final String ACTION_ADRESS = "agent://www.arbi.com/Tow2/action";
+	public static  String REASONER_ADRESS = "agent://www.arbi.com/Tow2/TaskReasoner";
 	public static final String PREFIX = "http://www.arbi.com//ontologies#";
 	
 
@@ -75,10 +75,10 @@ public class TaskManager_Tow extends ArbiAgent {
 		//ENV_JMS_BROKER = "tcp://" + System.getenv("JMS_BROKER");
 		//ENV_AGENT_NAME = System.getenv("AGENT");
 		//ENV_ROBOT_NAME = System.getenv("ROBOT");
-		ENV_JMS_BROKER = "tcp://172.16.165.204"  + ":61114";
+		ENV_JMS_BROKER = "tcp://172.16.165.204"  + ":61112";
 		
-		ENV_AGENT_NAME = "Tow1";
-		ENV_ROBOT_NAME = "AMR_TOW1";
+		ENV_AGENT_NAME = "Tow2";
+		ENV_ROBOT_NAME = "AMR_TOW2";
 		CONTEXTMANAGER_ADRESS =  AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + "/ContextManager"; 
 		REASONER_ADRESS =  AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + "/TaskReasoner"; 
 		BEHAVIOUR_INTERFACE_ADDRESS = AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + "/BehaviorInterface"; 
@@ -86,8 +86,7 @@ public class TaskManager_Tow extends ArbiAgent {
 	public void test(){
 		
 		if(isTriggered == false){
-			System.out.println("test");
-			
+
 			messageQueue.add(new RecievedMessage("test","(WakeupService)"));
 			isTriggered = true;
 		}
@@ -129,7 +128,7 @@ public class TaskManager_Tow extends ArbiAgent {
 
 	@Override
 	public void onNotify(String sender, String notification) {
-		System.out.println("recieved Notify from " + sender + " : " + notification);
+	
 //		aplViewer.msgReceived(notification, sender);
 		RecievedMessage msg = new RecievedMessage(sender, notification);
 		messageQueue.add(msg);	
@@ -180,8 +179,6 @@ public class TaskManager_Tow extends ArbiAgent {
 //				aplViewer.msgReceived(data, sender);
 
 				gl = GLFactory.newGLFromGLString(data);
-
-				System.out.println("message dequeued : " + gl.toString());
 
 				if (gl.getName().equals("PostGoal")) {
 					//System.out.println("test");
