@@ -18,12 +18,10 @@ PLAN PERFORM isro:RequestNavigate($robotID,$start,$end){
 		
 		$actionID = $helper.getActionID($agent);
 			
-		$communicationInstance.request($address, "(move (actionID \"" + $actionID + "\") " + $robotID + " " + $start +" " + $end + ")");
-				
+		$communicationInstance.request($address, "(Move (actionID \"" + $actionID + "\") \"" + $robotID + "\" " + $start +" " + $end + ")");
+		
 		System.out.println("wait id" + $actionID);
-		WAIT actionCompleted($actionID);
-		RETRACT actionCompleted($actionID);
-			
+		
 		PERFORM isro:endLog("PERFORM", "RequestMove");
 	UTILITY: 10; 
 }

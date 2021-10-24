@@ -37,15 +37,15 @@ public class TaskManager_Tow extends ArbiAgent {
 	public static final String ARBI_PREFIX = "www.arbi.com/";
 	public static final String BASE_AGENT_NAME = "/TaskManager";
 	
-	public static final String JMS_BROKER_URL = "tcp://172.16.165.135:61115";
+	public static final String JMS_BROKER_URL = "tcp://172.16.165.204:61114";
 	//public static final String JMS_BROKER_URL = "tcp://localhost:61616";
-	public static final String TASKMANAGER_ADRESS = "www.arbi.com/Lift2/TaskManager";
-	public static  String CONTEXTMANAGER_ADRESS = "agent://www.arbi.com/Lift2/ContextManager";
-	public static  String KNOWLEDGEMANAGER_ADRESS = "agent://www.arbi.com/Lift2/KnowledgeManager";
-	public static  String BEHAVIOUR_INTERFACE_ADDRESS = "agent://www.arbi.com/Lift2/BehaviourInterface";
+	public static final String TASKMANAGER_ADRESS = "www.arbi.com/Tow1/TaskManager";
+	public static  String CONTEXTMANAGER_ADRESS = "agent://www.arbi.com/Tow1/ContextManager";
+	public static  String KNOWLEDGEMANAGER_ADRESS = "agent://www.arbi.com/Tow1/KnowledgeManager";
+	public static  String BEHAVIOUR_INTERFACE_ADDRESS = "agent://www.arbi.com/Tow1/BehaviourInterface";
 	public static final String PERCEPTION_ADRESS = "agent://www.arbi.com/perception";
-	public static final String ACTION_ADRESS = "agent://www.arbi.com/Lift1/action";
-	public static  String REASONER_ADRESS = "agent://www.arbi.com/Lift1/TaskReasoner";
+	public static final String ACTION_ADRESS = "agent://www.arbi.com/Tow1/action";
+	public static  String REASONER_ADRESS = "agent://www.arbi.com/Tow1/TaskReasoner";
 	public static final String PREFIX = "http://www.arbi.com//ontologies#";
 	
 
@@ -75,9 +75,10 @@ public class TaskManager_Tow extends ArbiAgent {
 		//ENV_JMS_BROKER = "tcp://" + System.getenv("JMS_BROKER");
 		//ENV_AGENT_NAME = System.getenv("AGENT");
 		//ENV_ROBOT_NAME = System.getenv("ROBOT");
-		ENV_JMS_BROKER = "tcp://" + System.getenv("JMS_BROKER") + ":61113";
-		ENV_AGENT_NAME = "Tow2";
-		ENV_ROBOT_NAME = "AMR_TOW2";
+		ENV_JMS_BROKER = "tcp://172.16.165.204"  + ":61114";
+		
+		ENV_AGENT_NAME = "Tow1";
+		ENV_ROBOT_NAME = "AMR_TOW1";
 		CONTEXTMANAGER_ADRESS =  AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + "/ContextManager"; 
 		REASONER_ADRESS =  AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + "/TaskReasoner"; 
 		BEHAVIOUR_INTERFACE_ADDRESS = AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + "/BehaviorInterface"; 
@@ -142,9 +143,10 @@ public class TaskManager_Tow extends ArbiAgent {
 
 		System.out.println("======Start Test Agent======");
 		System.out.println("??");
+		this.send("tester", "wtf");
 		// subscribe
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -153,10 +155,10 @@ public class TaskManager_Tow extends ArbiAgent {
 		//dc.subscribe(subscribeStatement);
 		//System.out.println("??");
 		String subscribeStatement = "(rule (fact (context $context)) --> (notify (context $context)))";
-		System.out.println("??");
-		System.out.println(dc.subscribe(subscribeStatement));
+		System.out.println("before subscribe");
+		String subID = dc.subscribe(subscribeStatement);
 		
-		System.out.println("??");
+		System.out.println("after subscribe");
 		
 		//subscribeStatement = "(rule (fact (UserIntention $person $intention)) --> (notify (UserIntention $person $intention)))";
 		//dc.subscribe(subscribeStatement);
