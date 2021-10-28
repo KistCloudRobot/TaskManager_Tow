@@ -21,12 +21,15 @@ PLAN PERFORM RackAttached($object, $location){
 		FACT GLUtility($glUtility);
 		FACT RobotAt($robot, $vertex1, $vertex2);
 		FACT isro:ReasonerAddress($reasoner);
+		FACT ExtraUtility($util);
 		
 	BODY:
 		PERFORM  isro:startLog("PERFORM", "RackAttached");
 		PERFORM  isro:UpdateAgentTaskStatus("RackAttached", "start");
 		
 		PERFORM isro:QueryStationVertex($location, $stationVertex);
+		
+		$util.sleepAwhile(1000);
 		PERFORM isro:RequestLoad($stationVertex);
 		
 		PERFORM  isro:UpdateAgentTaskStatus("RackAttached", "complete");

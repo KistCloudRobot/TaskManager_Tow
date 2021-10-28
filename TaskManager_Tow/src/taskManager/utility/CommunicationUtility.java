@@ -30,7 +30,7 @@ public class CommunicationUtility {
 	}
 	
 	public void inform(String receiver, String content) {
-		System.out.println("inform : " + receiver + " " + content);
+		//System.out.println("inform : " + receiver + " " + content);
 		try {
 			Thread.sleep(50);
 		} catch (InterruptedException e) {

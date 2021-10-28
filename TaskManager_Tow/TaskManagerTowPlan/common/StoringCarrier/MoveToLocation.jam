@@ -6,6 +6,7 @@ PLAN CONCLUDE PostMoveToLocation($location) {
 	PRECONDITION:
 	BODY:
 		POST PERFORM MoveToLocation($location);
+		System.out.println("goal posted");
 		RETRACT PostMoveToLocation($location);
 	UTILITY : 10000;
 }

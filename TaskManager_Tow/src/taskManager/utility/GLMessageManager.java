@@ -123,6 +123,7 @@ public class GLMessageManager {
 	}
 
 	public String removeQuotationMarks(String input) {
+		//System.out.println("removed??? : " + input);
 		if (input.startsWith("\"")) {
 			input = input.substring(1, input.length() - 1);
 		}

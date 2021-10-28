@@ -20,11 +20,14 @@ PLAN PERFORM RackSeparated($object, $location){
 		FACT GLUtility($glUtility);
 		FACT RobotAt($robot, $vertex1, $vertex2);
 		FACT isro:ReasonerAddress($reasoner);
+		FACT ExtraUtility($util);
 	BODY:
 		PERFORM isro:startLog("PERFORM", "RackSeparated");
 		PERFORM isro:UpdateAgentTaskStatus("RackSeparated", "start");
 		
 		PERFORM isro:QueryStationVertex($location, $stationVertex);
+		
+		$util.sleepAwhile(2000);
 		PERFORM isro:RequestUnload($stationVertex);
 		
 		PERFORM isro:UpdateAgentTaskStatus("RackSeparated", "complete");

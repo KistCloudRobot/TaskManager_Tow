@@ -57,11 +57,12 @@ public class TaskManager_Tow extends ArbiAgent {
 	public TaskManager_Tow() {
 		
 
+		messageQueue = new LinkedBlockingQueue<RecievedMessage>();
+		
 		initAddress();
 		
 		ArbiAgentExecutor.execute(ENV_JMS_BROKER, AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + BASE_AGENT_NAME, this,2);
 		interpreter = JAM.parse(new String[] { "./TaskManagerTowPlan/boot.jam" });
-		messageQueue = new LinkedBlockingQueue<RecievedMessage>();
 		
 		msgManager = new GLMessageManager(interpreter);
 		
@@ -75,10 +76,10 @@ public class TaskManager_Tow extends ArbiAgent {
 		//ENV_JMS_BROKER = "tcp://" + System.getenv("JMS_BROKER");
 		//ENV_AGENT_NAME = System.getenv("AGENT");
 		//ENV_ROBOT_NAME = System.getenv("ROBOT");
-		ENV_JMS_BROKER = "tcp://172.16.165.204"  + ":61112";
+		ENV_JMS_BROKER = "tcp://127.0.0.1"  + ":61114";
 		
-		ENV_AGENT_NAME = "Tow2";
-		ENV_ROBOT_NAME = "AMR_TOW2";
+		ENV_AGENT_NAME = "Tow1";
+		ENV_ROBOT_NAME = "AMR_TOW1";
 		CONTEXTMANAGER_ADRESS =  AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + "/ContextManager"; 
 		REASONER_ADRESS =  AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + "/TaskReasoner"; 
 		BEHAVIOUR_INTERFACE_ADDRESS = AGENT_PREFIX + ARBI_PREFIX + ENV_AGENT_NAME + "/BehaviorInterface"; 
@@ -142,7 +143,7 @@ public class TaskManager_Tow extends ArbiAgent {
 
 		System.out.println("======Start Test Agent======");
 		System.out.println("??");
-		this.send("tester", "wtf");
+//		this.send("tester", "wtf");
 		// subscribe
 		try {
 			Thread.sleep(3000);
@@ -180,7 +181,7 @@ public class TaskManager_Tow extends ArbiAgent {
 
 				gl = GLFactory.newGLFromGLString(data);
 
-				if (gl.getName().equals("PostGoal")) {
+				if (gl.getName().equals("postGoal")) {
 					//System.out.println("test");
 					gl = gl.getExpression(0).asGeneralizedList();
 
@@ -261,14 +262,20 @@ public class TaskManager_Tow extends ArbiAgent {
 
 	@Override
 	public void onData(String sender, String data) {
-		System.out.println("recieved data from " + sender + " : " + data);
-		RecievedMessage msg = new RecievedMessage(sender, data);
-		messageQueue.add(msg);
+		System.out.println("onData recieved data from " + sender + " : " + data);
+		if (sender.equals("agent://www.arbi.com/Local/NavigationController")) {
+			System.out.println("this is wrong message!");
+			System.out.println(data);
+		} else {
+			RecievedMessage msg = new RecievedMessage(sender, data);
+			messageQueue.add(msg);
+		}
+		
 	}
 
 	@Override
 	public String onRequest(String sender, String request) {
-		System.out.println("received data from " + sender + " : " + request);
+		//System.out.println("received data from " + sender + " : " + request);
 		RecievedMessage msg = new RecievedMessage(sender, request);
 		messageQueue.add(msg);
 
