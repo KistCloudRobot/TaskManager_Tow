@@ -7,7 +7,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import taskManager.TaskManager_Tow;
+import taskManager.TaskManager_Tow2;
 
 public class MessageReceivedPanel extends JPanel{
 
@@ -77,13 +77,13 @@ public class MessageReceivedPanel extends JPanel{
 	public void addMessage(String message, String sender){
 		Object[] msg = new Object[1];
 		msg[0] = message;
-		if(sender.equals(TaskManager_Tow.CONTEXTMANAGER_ADRESS)){
+		if(sender.equals(TaskManager_Tow2.CONTEXTMANAGER_ADRESS)){
 			contextManagerMessage.addRow(msg);
 			selected = 0;
-		}else if(sender.equals(TaskManager_Tow.KNOWLEDGEMANAGER_ADRESS)){
+		}else if(sender.equals(TaskManager_Tow2.KNOWLEDGEMANAGER_ADRESS)){
 			knowledgeManagerMessage.addRow(msg);
 			selected = 1;
-		}else if(sender.equals(TaskManager_Tow.BEHAVIOUR_INTERFACE_ADDRESS)){
+		}else if(sender.equals(TaskManager_Tow2.BEHAVIOUR_INTERFACE_ADDRESS)){
 			behaviorManagerMessage.addRow(msg);
 			selected = 2;
 		}else{

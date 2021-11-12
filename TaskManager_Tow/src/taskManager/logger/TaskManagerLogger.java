@@ -3,7 +3,7 @@ package taskManager.logger;
 import kr.ac.uos.ai.arbi.agent.logger.AgentAction;
 import kr.ac.uos.ai.arbi.agent.logger.LogTiming;
 import kr.ac.uos.ai.arbi.agent.logger.LoggerManager;
-import taskManager.TaskManager_Tow;
+import taskManager.TaskManager_Tow2;
 import taskManager.logger.*;
 import taskManager.logger.argument.GoalArgument;
 import taskManager.logger.argument.RelationArgument;
@@ -24,10 +24,10 @@ public class TaskManagerLogger implements WorldModelChangeListener, IntentionStr
 	private AgentAction newGoalAction;
 	private AgentAction unpostGoalAction;
 	private AgentAction intendAction;
-	private TaskManager_Tow taskManager;
+	private TaskManager_Tow2 taskManager;
 	private Interpreter interpreter;
 	
-	public TaskManagerLogger(TaskManager_Tow taskManager,Interpreter interpreter){
+	public TaskManagerLogger(TaskManager_Tow2 taskManager,Interpreter interpreter){
 		this.taskManager = taskManager;
 		this.interpreter = interpreter;
 		init();

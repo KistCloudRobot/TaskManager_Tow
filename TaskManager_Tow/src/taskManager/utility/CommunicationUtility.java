@@ -4,7 +4,7 @@ import kr.ac.uos.ai.arbi.agent.ArbiAgent;
 import kr.ac.uos.ai.arbi.model.GLFactory;
 import kr.ac.uos.ai.arbi.model.GeneralizedList;
 import kr.ac.uos.ai.arbi.model.parser.ParseException;
-import taskManager.TaskManager_Tow;
+import taskManager.TaskManager_Tow2;
 import taskManager.TaskManagerDataSource;
 
 public class CommunicationUtility {
@@ -53,7 +53,7 @@ public class CommunicationUtility {
 		int count = 2;
 
 		while (result.equals("true") == false) {
-			result = taskManager.request(TaskManager_Tow.ACTION_ADRESS, "(move " + location + " (actionID " + count + "))");
+			result = taskManager.request(TaskManager_Tow2.ACTION_ADRESS, "(move " + location + " (actionID " + count + "))");
 			count++;
 			
 			GeneralizedList gl;
