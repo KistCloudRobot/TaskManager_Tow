@@ -29,7 +29,6 @@ PLAN PERFORM RackAttached($object, $location){
 		
 		PERFORM isro:QueryStationVertex($location, $stationVertex);
 		
-		$util.sleepAwhile(1000);
 		PERFORM isro:RequestLoad($stationVertex);
 		
 		PERFORM  isro:UpdateAgentTaskStatus("RackAttached", "complete");
