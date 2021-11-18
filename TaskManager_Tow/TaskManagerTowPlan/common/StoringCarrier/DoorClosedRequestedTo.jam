@@ -10,13 +10,13 @@ PLAN CONCLUDE PostDoorClosedRequestedTo($executor, $goalID){
 	BODY:
 		PERFORM isro:startLog("ACHIEVE", "PostDoorClosedRequestedTo");
 		$helper.sleepAwhile(2000);
-		POST ACHIEVE DoorClosedRequestedTo($executor, $goalID, $goal);
+		POST PERFORM DoorClosedRequestedTo($executor, $goalID, $goal);
 		RETRACT PostDoorClosedRequestedTo($executor, $goalID, $goal);
 		PERFORM isro:endLog("ACHIEVE", "PostDoorClosedRequestedTo");
 	utility : 10;
 }
 
-PLAN ACHIEVE DoorClosedRequestedTo($executor, $goalID){
+PLAN PERFORM DoorClosedRequestedTo($executor, $goalID){
 	ID: "http://www.arbi.com//DoorClosedRequestedTo"
 	PRECONDITION:
 		FACT Communication($communicationInstance);

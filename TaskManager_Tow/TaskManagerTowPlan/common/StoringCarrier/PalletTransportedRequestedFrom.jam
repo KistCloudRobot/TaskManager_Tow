@@ -58,7 +58,7 @@ PLAN PERFORM MovingRackTransportedReportedTo($manager, $goalID, $goal){
 		
 		PERFORM isro:UpdateAgentTaskStatus("MovingRackTransportedReportedTo", "complete");
 		PERFORM isro:endLog("PERFORM", "MovingRackTransportedReportedTo");
-		$communicationInstance.inform($reasoner, "(goalComplete (MovingRackTransportedReportedTo \"Local\" \"" + $goalID + "\" " + $goal + "))");
+		$communicationInstance.inform($reasoner, "(goalComplete (MovingRackTransportedReportedTo \"Local\" \"" + $goalID + "\" \"" + $goal + "\"))");
 		perform ReturnToWait();
 	UTILITY: 100; 
 }
