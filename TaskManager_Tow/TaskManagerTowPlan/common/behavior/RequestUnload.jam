@@ -16,6 +16,7 @@ PLAN PERFORM isro:RequestUnload($vertex){
 		PERFORM isro:startLog("PERFORM", "isro:RequestUnload");
 		
 		$actionID = $helper.getActionID($agent);
+		$helper.sleepAwhile(1000);
 			
 		$communicationInstance.request($address, "(unload (actionID \"" + $actionID + "\") " + $vertex + ")");
 				

@@ -1,0 +1,31 @@
+PREFIXES:
+		PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+
+
+PLAN PERFORM isro:RequestPreciseMove($robotID, $vertex){
+	ID: "http://www.arbi.com//RequestPreciseMove"
+	PRECONDITION:
+		FACT Communication($communicationInstance);
+		FACT isro:NavigationControllerAddress($address);
+		FACT GLUtility($glUtility);
+		FACT ExtraUtility($helper);
+		//FACT OnRobotTaskStatus($robot, $status);
+		//$status == "Ready";
+		FACT isro:agent($agent);
+		
+	BODY:
+		PERFORM isro:startLog("PERFORM", "isro:RequestPreciseMove");
+		
+		$actionID = $helper.getActionID($agent);
+			
+		$communicationInstance.request($address, "(PreciseMove (actionID \"" + $actionID + "\") \"" + $robotID + "\" " + $vertex+ ")");
+		
+		System.out.println("wait id : " + $actionID);
+		
+		WAIT actionCompleted($actionID);
+		RETRACT actionCompleted($actionID);
+			
+		
+		PERFORM isro:endLog("PERFORM", "isro:RequestPreciseMove");
+	UTILITY: 10; 
+}

@@ -1,0 +1,26 @@
+PREFIXES:
+		PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+
+
+PLAN PERFORM isro:EnterToStation($location){
+	ID: "http://www.arbi.com//BuiltInPlan#EnterToStation"
+	PRECONDITION:
+		FACT Communication($communicationInstance);
+		FACT GLUtility($glUtility);
+		FACT RobotAt($robot, $vertex1, $vertex2);
+		FACT ExtraUtility($util);
+	BODY:
+		PERFORM  isro:startLog("PERFORM", "isro:EnterToStation");
+		
+		PERFORM isro:QueryStationMoveType($location, "in", $result);
+		
+		$moveType = $glUtility.retrieveGLName($result);
+		System.out.println("moveType : " + $moveType);
+		System.out.println("argument : " + $result);
+		PERFORM isro:StationMove($moveType, $result);
+			
+		PERFORM isro:endLog("PERFORM", "isro:EnterToStation");
+		
+	UTILITY: 10; 
+
+}

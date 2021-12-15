@@ -25,9 +25,12 @@ PLAN PERFORM RackSeparated($object, $location){
 		PERFORM isro:startLog("PERFORM", "RackSeparated");
 		PERFORM isro:UpdateAgentTaskStatus("RackSeparated", "start");
 		
-		PERFORM isro:QueryStationVertex($location, $stationVertex);
+		PERFORM isro:EnterToStation($location);
 		
+		PERFORM isro:QueryStationVertex($location, $stationVertex);
 		PERFORM isro:RequestUnload($stationVertex);
+		
+		PERFORM isro:ExitFromStation($location);
 		
 		PERFORM isro:UpdateAgentTaskStatus("RackSeparated", "complete");
 		PERFORM isro:endLog("PERFORM", "RackSeparated");

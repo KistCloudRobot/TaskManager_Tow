@@ -15,6 +15,7 @@ PLAN PERFORM isro:RequestLoad($vertex){
 		PERFORM isro:startLog("PERFORM", "isro:RequestLoad");
 		
 		$actionID = $helper.getActionID($agent);
+		$helper.sleepAwhile(1000);
 			
 		$communicationInstance.request($address, "(load (actionID \"" + $actionID + "\") " + $vertex + ")");
 				

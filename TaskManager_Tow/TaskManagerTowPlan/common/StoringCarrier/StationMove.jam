@@ -1,0 +1,89 @@
+PREFIXES:
+		PREFIX isro: <http://www.arbi.com//BuiltInPlan#>;
+
+PLAN PERFORM isro:StationMove($moveType, $argument){
+	ID: "http://www.arbi.com//BuiltInPlan#StationMovePrecise"
+	PRECONDITION:
+		FACT Communication($communicationInstance);
+		FACT GLUtility($glUtility);
+		FACT ExtraUtility($util);
+		FACT RobotAt($robot, $vertex1,$vertex2);
+		$moveType == "PreciseMove";
+	BODY:
+		PERFORM  isro:startLog("PERFORM", "isro:StationMove");
+		
+		System.out.println("PreciseMove!!!");
+		$vertex = $glUtility.retrieveGLExpression($argument, 0);
+		System.out.println("PreciseMove vertex is " + $vertex);
+		PERFORM isro:RequestPreciseMove($robot, $vertex);
+				
+		PERFORM isro:endLog("PERFORM", "isro:StationMove");
+		
+	UTILITY: 10; 
+
+}
+
+PLAN PERFORM isro:StationMove($moveType, $argument){
+	ID: "http://www.arbi.com//BuiltInPlan#StationMoveGuide"
+	PRECONDITION:
+		FACT Communication($communicationInstance);
+		FACT GLUtility($glUtility);
+		FACT ExtraUtility($util);
+		FACT RobotAt($robot, $vertex1,$vertex2);
+		$moveType == "GuideMove";
+	BODY:
+		PERFORM  isro:startLog("PERFORM", "isro:StationMove");
+		
+		System.out.println("GuideMove!!!");
+		
+		System.out.println("moveType : " + $moveType);
+		System.out.println("argument : " + $argument);
+		
+		$vertex = $glUtility.retrieveGLExpression($argument, 0);
+		$direction = $glUtility.retrieveGLExpression($argument, 1);
+		System.out.println("GuideMove vertex is " + $vertex);
+		System.out.println("GuideMove direction is " + $direction);
+		PERFORM isro:RequestGuideMove($robot, $vertex, $direction);
+				
+		PERFORM isro:endLog("PERFORM", "isro:StationMove");
+		
+	UTILITY: 10; 
+
+}
+
+
+
+PLAN PERFORM isro:StationMove($moveType, $argument){
+	ID: "http://www.arbi.com//BuiltInPlan#StationMoveStraightBack"
+	PRECONDITION:
+		FACT Communication($communicationInstance);
+		FACT GLUtility($glUtility);
+		FACT ExtraUtility($util);
+		FACT RobotAt($robot, $vertex1,$vertex2);
+		$moveType == "StraightBackMove";
+	BODY:
+		PERFORM  isro:startLog("PERFORM", "isro:StationMove");
+		
+		System.out.println("StraightBackMove!!!");
+		$vertex = $glUtility.retrieveGLExpression($argument, 0);
+		System.out.println("StraightBackMove vertex is " + $vertex);
+		PERFORM isro:RequestStraightBackMove($robot, $vertex);
+				
+		PERFORM isro:endLog("PERFORM", "isro:StationMove");
+		
+	UTILITY: 10; 
+
+}
+PLAN PERFORM isro:StationMove($moveType, $argument){
+	ID: "http://www.arbi.com//BuiltInPlan#StationFail"
+	PRECONDITION:
+	BODY:
+		PERFORM  isro:startLog("PERFORM", "isro:StationMove");
+		
+		System.out.println("Station Move failed");
+				
+		PERFORM isro:endLog("PERFORM", "isro:StationMove");
+		
+	UTILITY: 1; 
+
+}

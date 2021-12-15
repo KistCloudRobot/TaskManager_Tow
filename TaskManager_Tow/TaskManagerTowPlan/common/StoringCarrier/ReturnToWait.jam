@@ -27,7 +27,7 @@ PLAN perform ReturnToWait(){
 		RETRIEVE WaitVertex($waitVertex);
 		RETRIEVE ChargeStation($charge);
 
-		PERFORM  isro:RequestNavigate($robot,$vertex1,$charge);
+		PERFORM  isro:RequestNavigate($robot,$vertex1,$waitVertex);
 
 		PERFORM  isro:UpdateAgentTaskStatus("ReturnToWait", "complete");
 		PERFORM  isro:endLog("PERFORM", "ReturnToWait");
